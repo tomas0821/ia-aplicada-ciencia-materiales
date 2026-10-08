@@ -35,6 +35,16 @@ Además:
 3. Abra el notebook del día y elija el kernel **Python-AI-Materials** (Kernel → Change kernel).
 4. Corra las celdas de arriba hacia abajo.
 
+## Antes de usarlo fuera de Kabré
+
+Para que GitHub aceptara la subida por la web, tres carpetas van comprimidas. Descomprímalas una vez desde la raíz del repo:
+
+```bash
+unzip mattergen_src.zip
+unzip datos/mattergen_fallback.zip -d datos
+unzip datos/vision/sem_prueba.zip -d datos/vision
+```
+
 ## Lo que no viene en el repo
 
 - **Tres archivos grandes** (más de 10 MB) no se pudieron subir por la web de GitHub. Están en la carpeta del curso en Kabré (`/work/trojas/ia_cm_cnca/curso/datos/`); cópielos a la misma ruta dentro de `datos/`:
