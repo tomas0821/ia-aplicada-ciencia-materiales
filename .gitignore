@@ -1,0 +1,6 @@
+.env
+__pycache__/
+.ipynb_checkpoints/
+salidas_mattergen/
+salidas_vision/
+tareas/registros/*.out
