@@ -107,6 +107,7 @@ lossf = nn.CrossEntropyLoss(weight=peso)
 BS = 256
 opt = torch.optim.AdamW(m.parameters(), lr=2e-3, weight_decay=1e-4)
 sched = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=2e-3, total_steps=a.epocas * math.ceil(len(tr) / BS))
+EB = 1024 if dev == "cuda" else 128   # lotes de evaluación; en CPU más pequeños para no agotar la RAM (Colab)
 TODO = {k: True for k in AUG}      # validación y prueba siempre con datos "realistas"
 
 
@@ -114,8 +115,8 @@ def exactitud(idx):
     m.eval(); ok = 0
     g = torch.Generator(device=dev); g.manual_seed(123)
     with torch.no_grad():
-        for k in range(0, len(idx), 1024):
-            b = torch.tensor(idx[k:k + 1024], device=dev)
+        for k in range(0, len(idx), EB):
+            b = torch.tensor(idx[k:k + EB], device=dev)
             ok += (m(perfiles(b, TODO, g)).argmax(1) == Y[b]).sum().item()
     return ok / len(idx)
 
